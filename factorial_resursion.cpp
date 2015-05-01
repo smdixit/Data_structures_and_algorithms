@@ -5,6 +5,7 @@
 #include "stdio.h"
 
 static int fact(int n);
+static int fact_tail(int n, int a);
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -14,14 +15,14 @@ int _tmain(int argc, _TCHAR* argv[])
 	do{
 		printf("Enter an integer. -5 to quit\n");
 		scanf("%d", &num);
-		result = fact(num);
+		result = fact_tail(num, 1);
 		printf("result= %d\n", result);
 	}while(num != -5);
 		
 	return 0;
 }
 
-int fact(int n)
+static int fact(int n)
 {
 	if(n < 0)
 		return -1;
@@ -29,4 +30,16 @@ int fact(int n)
 		return 1;
 	else
 		return n*fact(n-1);
+}
+
+static int fact_tail(int n, int a)
+{
+	if(n < 0)
+		return -1;
+	else if((n == 0) || (n == 1))
+		return a;
+	else
+		a = fact_tail(n-1, a);
+
+	return a*n;
 }
