@@ -1,28 +1,35 @@
-// factorial_resursion.cpp : Defines the entry point for the console application.
-//
+/*
+* factorial_resursion.c : Defines the entry point for the console application.
+*/
+#define FACTORIAL_RECURSION_C
 
-#include "stdafx.h"
 #include "stdio.h"
 
 static int fact(int n);
 static int fact_tail(int n, int a);
 
-int _tmain(int argc, _TCHAR* argv[])
+int main(int argc, char* argv[])
 {
 	int num;
 	int result;
+	char c;
+
+	c = *argv[1];
 
 	do{
 		printf("Enter an integer. -5 to quit\n");
 		scanf("%d", &num);
-		result = fact_tail(num, 1);
+		if(c == 't')
+			result = fact_tail(num, 1);
+		else
+			result = fact(num);
 		printf("result= %d\n", result);
 	}while(num != -5);
-		
+
 	return 0;
 }
 
-static int fact(int n)
+int fact(int n)
 {
 	if(n < 0)
 		return -1;
@@ -32,7 +39,7 @@ static int fact(int n)
 		return n*fact(n-1);
 }
 
-static int fact_tail(int n, int a)
+int fact_tail(int n, int a)
 {
 	if(n < 0)
 		return -1;

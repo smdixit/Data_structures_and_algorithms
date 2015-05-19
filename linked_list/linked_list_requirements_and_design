@@ -1,0 +1,35 @@
+Requirements:
+1. A singly linked list with upto 65535 items.
+2. To be able to insert a member anywhere in the list - including before head and after tail.
+3. To be able to delete a member anywhere - including head and tail.
+4. To be able to destroy the list.
+5. List access - data of an element, next element an element, current size.
+
+Design:
+1. void init_list(LIST_T *p_list, void (*destroy)(void *data))
+- Init head and tail to NULL.
+- set size to zero, head and tail are not included as items.
+- Assign destroy callback of the application to free the data that application was using.
+- Return: void.
+
+2. int list_destroy(LIST_T *p_list)
+- Remove each element and call destroy callback so the application can clean up its associated data.
+- Set all members of list to NULL, unintended access should not cause any data corruption.
+- Return: 0 on sucess, -1 on failure.
+
+3. int list_ins_next(LIST_T *list, LISTELE_T *element, void *data)
+- Insert an item next to the *element.
+- If the element == NULL, then this element must be set to head, that is, inserted as head.
+- if the element->next == NULL, then this element must be inserted as tail.
+- Return: 0 on sucess, -1 on failure.
+
+4. int list_del_next(LIST_T *list, LISTELE_T *element, void **data)
+- Delete the item next to *element.
+- If element == NULL, delete the head and assign new head.
+- If element->next == NULL, nothing is there after tail, return failurnothing is there after tail, return failurere.
+- Feed pointer to the deleted element's data in **data.
+- free the pointer to the deleted element of the list.
+- Decrement size if scucessful deletion.
+- Return: void.
+
+5. Other macros are very staraight forward.
