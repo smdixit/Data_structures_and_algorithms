@@ -1,5 +1,5 @@
 Requirements:
-1. A singly linked list with upto 65535 items.
+1. A singly linked list with upto 1024 items.
 2. To be able to insert a member anywhere in the list - including before head and after tail.
 3. To be able to delete a member anywhere - including head and tail.
 4. To be able to destroy the list.
@@ -26,10 +26,58 @@ Design:
 4. int list_del_next(LIST_T *list, LISTELE_T *element, void **data)
 - Delete the item next to *element.
 - If element == NULL, delete the head and assign new head.
-- If element->next == NULL, nothing is there after tail, return failurnothing is there after tail, return failurere.
+- If element->next == NULL, nothing is there after tail, return failure, nothing is there after tail, return failurere.
 - Feed pointer to the deleted element's data in **data.
 - free the pointer to the deleted element of the list.
-- Decrement size if scucessful deletion.
+- Decrement size if successful deletion.
 - Return: void.
 
 5. Other macros are very staraight forward.
+
+Constrains:
+- Caller is responsible for passing valid list and element. If an element that does not belong to a list is passed, behaviour is undefined.
+- The list implementation does not make assumptions about type of data stored. It only keeps a pointer to the given data. The caller is responsible to maintain this data. It could be a simple int type or struct or anything, the list just holds a pointer to it. The app is responsible.
+
+
+
+Test spec/procedure:
+1. Init the list.
+2. Try to remove Head.
+	- The remove call should not crash.
+	- size remains at 0.
+	- Head and Tail are still at NULL as done init.
+3. Try to remove Tail
+	- Same as or Head.
+4. Polulate 1024 distinct items to list with calls to insert API.
+	- Check correctness of each populated value.
+	- Size should be 1024.
+5. Try to populate 1 more item anywhere.
+	- Insert API should report error and not crash.
+	- Size should be 1024.
+	- All the items in the list should remain as it was before this try.
+6. Remove Head.
+	- The new head contains value next to removed head.
+	- size = 1023.
+7. Remove Tail.
+	- The new tail contains value previous to removed tail.
+	- size = 1022.
+8. Try to remove an item next to tail.
+	- Exists without crash.
+	- size = 1022.
+9. Remove some item in between.
+	- Sucessfully removed without error/crash.
+	- size = 1021.
+	- All other items are intact.
+10. Insert an item inbetween.
+	- Sucessfully inserted an element.
+	- size = 1022.
+	- all other items intact.
+11. Insert new Head.
+	- Sucessfully inserted Head element.
+	- size = 1023.
+	- all other items intact.
+12. Insert new Tail.
+	- Sucessfully inserted Tail element.
+	- size = 1024.
+	- all other items intact.
+
