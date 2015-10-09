@@ -7,8 +7,20 @@ static int temp[MAX_LIST_SIZE];
 
 void destroy(void *data);
 static int destroyCall_cnt;
+static int result = 0;
+
 
 int main(void)
+{
+
+
+	if(result == 0)
+		printf("All tests of singly linked list passed.");
+	else
+		printf("Singly linked list test number: %d failed", result);
+}
+
+void test_n(void)
 {
 	void *data;
 	int i;
