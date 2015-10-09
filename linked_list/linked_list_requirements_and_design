@@ -36,10 +36,10 @@ Design:
 
 Constrains:
 - Though it is a library, it does not support concurent access from a multiple
-  threads. (As It is not required now)
-- Caller is responsible for passing valid list and element. If an element that 
+  threads (not required now).
+- Caller is responsible for passing valid list and element. If an element that
   does not belong to a list is passed, behaviour is undefined.
-- The list implementation does *not* make assumptions about type of data 
+- The list implementation does *not* make assumptions about type of data
   stored. It only keeps a pointer to the given data. The caller is responsible
   to maintain this data. It could be a simple int type or struct or anything,
   the list just holds a pointer to it.
