@@ -1,4 +1,7 @@
-# this is a comment
+#Makefile for linked list files.
+
+.PHONY : all clean
+
 SRC=linked_list.c linked_list_test.c
 OBJ=$(SRC:.c=.o) # replaces the .c from SRC with .o
 EXE=linked_list
@@ -8,9 +11,7 @@ CFLAGS=-c -Wall -O3
 LDFLAGS=
 RM=rm
 
-.PHONY : all clean
 all: $(EXE)
-
 
 $(EXE): $(OBJ)
 	$(CC) $(OBJ) -o $@
