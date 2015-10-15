@@ -12,12 +12,12 @@ static int result = 0;
 
 int main(void)
 {
-
-
 	if(result == 0)
-		printf("All tests of singly linked list passed.");
+		printf("All tests of singly linked list passed.\n");
 	else
-		printf("Singly linked list test number: %d failed", result);
+		printf("Singly linked list test number: %d failed.\n", result);
+
+	return 0;
 }
 
 void test_n(void)
@@ -39,8 +39,6 @@ void test_n(void)
 
 	list_del_next(list_1, item_1[0], &data);
 	list_del_next(list_1, NULL, &data);
-
-	return 0;
 }
 
 void destroy(void *data)
